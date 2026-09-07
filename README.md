@@ -34,3 +34,4 @@ Edit `index.html` if you need stronger language around balances, account migrati
 # slotcraze
 # slotcraze
 # slotcraze
+# slotcraze
