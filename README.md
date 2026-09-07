@@ -33,3 +33,4 @@ Open http://localhost:4173
 Edit `index.html` if you need stronger language around balances, account migration, or support contact.
 # slotcraze
 # slotcraze
+# slotcraze

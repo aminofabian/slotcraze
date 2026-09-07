@@ -31,8 +31,11 @@
   --max: 72rem;
   --content: 40rem;
   --measure: 62ch;
-  --header-h: 4rem;
+  --gutter: 1.25rem;
+  --header-h: 3.75rem;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 *,
@@ -43,12 +46,15 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: calc(var(--header-h) + var(--space-4));
+  scroll-padding-top: calc(var(--header-h) + var(--space-4) + var(--safe-top));
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   color: var(--ink);
   background: var(--bg);
   font-family: var(--font-body);
@@ -56,9 +62,10 @@ body {
   font-weight: 400;
   line-height: 1.65;
   letter-spacing: 0.01em;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  padding-bottom: var(--safe-bottom);
 }
 
 ::selection {
@@ -76,6 +83,8 @@ a {
   color: var(--cyan);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 a:hover {
@@ -89,7 +98,7 @@ a:hover {
 
 .skip-link {
   position: absolute;
-  left: var(--space-4);
+  left: var(--gutter);
   top: -4rem;
   z-index: 100;
   padding: var(--space-3) var(--space-4);
@@ -101,7 +110,7 @@ a:hover {
 }
 
 .skip-link:focus {
-  top: var(--space-4);
+  top: calc(var(--space-4) + var(--safe-top));
 }
 
 /* Atmosphere — soft depth, no grid costume */
@@ -126,8 +135,8 @@ a:hover {
 
 .atmosphere__beam {
   position: absolute;
-  width: 42vmax;
-  height: 42vmax;
+  width: min(42vmax, 28rem);
+  height: min(42vmax, 28rem);
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.22;
@@ -150,9 +159,9 @@ a:hover {
 
 .atmosphere__mark {
   position: absolute;
-  right: -6%;
-  bottom: 10%;
-  width: min(36vw, 22rem);
+  right: -8%;
+  bottom: 8%;
+  width: min(42vw, 14rem);
   opacity: 0.05;
   transform: rotate(-10deg);
 }
@@ -162,7 +171,8 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 20;
-  height: var(--header-h);
+  height: calc(var(--header-h) + var(--safe-top));
+  padding-top: var(--safe-top);
   backdrop-filter: blur(16px) saturate(1.1);
   background: rgba(3, 7, 7, 0.78);
   border-bottom: 1px solid transparent;
@@ -175,17 +185,17 @@ a:hover {
 }
 
 .site-header__inner {
-  width: min(100% - 2rem, var(--max));
-  height: 100%;
+  width: min(100% - (var(--gutter) * 2), var(--max));
+  height: var(--header-h);
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .brand--compact {
-  width: min(8.75rem, 36vw);
+  width: min(7.75rem, 42vw);
   flex-shrink: 0;
   opacity: 0.92;
   transition: opacity 0.2s ease;
@@ -196,8 +206,8 @@ a:hover {
 }
 
 .brand--hero {
-  width: min(15.5rem, 68vw);
-  margin-bottom: var(--space-6);
+  width: min(14.5rem, 78vw);
+  margin-bottom: var(--space-5);
   opacity: 0;
   animation: rise 0.9s var(--ease) 0.04s forwards;
 }
@@ -209,8 +219,9 @@ a:hover {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-4);
   font-size: 0.875rem;
+  flex-shrink: 0;
 }
 
 .site-nav a:not(.site-nav__cta) {
@@ -219,6 +230,8 @@ a:hover {
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .site-nav a:not(.site-nav__cta):hover {
@@ -228,12 +241,14 @@ a:hover {
 .site-nav__cta {
   color: var(--cyan-ink) !important;
   background: var(--cyan);
-  padding: 0.55rem 0.95rem;
+  padding: 0.5rem 0.85rem;
   border-radius: var(--radius);
   font-weight: 600 !important;
   min-height: 2.5rem;
   display: inline-flex;
   align-items: center;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .site-nav__cta:hover {
@@ -243,24 +258,25 @@ a:hover {
 
 /* Hero — one composition */
 .hero {
-  width: min(100% - 2rem, 36rem);
+  width: min(100% - (var(--gutter) * 2), 36rem);
   margin: 0 auto;
-  min-height: calc(100svh - var(--header-h));
+  min-height: calc(100svh - var(--header-h) - var(--safe-top));
+  min-height: calc(100dvh - var(--header-h) - var(--safe-top));
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--space-8) 0 var(--space-9);
+  padding: var(--space-7) 0 var(--space-8);
   text-align: center;
 }
 
 .hero h1 {
   margin: 0;
-  max-width: 12ch;
+  max-width: 11ch;
   font-family: var(--font-display);
-  font-size: clamp(2.2rem, 6.5vw, 3.4rem);
+  font-size: clamp(2rem, 9vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.03em;
   text-wrap: balance;
   opacity: 0;
@@ -269,9 +285,9 @@ a:hover {
 
 .hero__lead {
   margin: var(--space-4) auto 0;
-  max-width: 36ch;
+  max-width: 32ch;
   color: var(--muted);
-  font-size: clamp(0.98rem, 2vw, 1.08rem);
+  font-size: clamp(0.95rem, 3.6vw, 1.08rem);
   line-height: 1.6;
   text-wrap: pretty;
   opacity: 0;
@@ -281,9 +297,10 @@ a:hover {
 .hero__actions,
 .actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: stretch;
+  width: min(100%, 20rem);
   gap: var(--space-3);
-  justify-content: center;
   margin-top: var(--space-6);
 }
 
@@ -293,7 +310,8 @@ a:hover {
 }
 
 .section__head--center .actions {
-  margin-top: var(--space-7);
+  margin-top: var(--space-6);
+  margin-inline: auto;
 }
 
 /* Buttons */
@@ -302,8 +320,9 @@ a:hover {
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
+  width: 100%;
   min-height: 3rem;
-  padding: 0.7rem 1.2rem;
+  padding: 0.75rem 1.1rem;
   border-radius: var(--radius);
   border: 1px solid transparent;
   font-family: var(--font-body);
@@ -311,6 +330,9 @@ a:hover {
   font-weight: 600;
   letter-spacing: 0.01em;
   text-decoration: none;
+  overflow-wrap: normal;
+  word-break: normal;
+  -webkit-tap-highlight-color: transparent;
   transition:
     background 0.2s ease,
     color 0.2s ease,
@@ -348,11 +370,16 @@ a:hover {
   background: var(--cyan-soft);
 }
 
+.section__cta {
+  width: 100%;
+  max-width: 20rem;
+}
+
 /* Sections — rhythm: more space above heads than below */
 .section {
-  width: min(100% - 2rem, var(--content));
+  width: min(100% - (var(--gutter) * 2), var(--content));
   margin: 0 auto;
-  padding: var(--space-9) 0;
+  padding: var(--space-8) 0;
 }
 
 .section + .section {
@@ -360,11 +387,11 @@ a:hover {
 }
 
 .section--close {
-  padding-bottom: var(--space-11);
+  padding-bottom: calc(var(--space-10) + var(--safe-bottom));
 }
 
 .section__head {
-  margin-bottom: var(--space-7);
+  margin-bottom: var(--space-6);
 }
 
 .section__head--center {
@@ -376,18 +403,18 @@ a:hover {
 .section h2 {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.6rem, 3.6vw, 2.15rem);
+  font-size: clamp(1.45rem, 5.4vw, 2.15rem);
   font-weight: 700;
   letter-spacing: -0.025em;
-  line-height: 1.15;
+  line-height: 1.18;
   text-wrap: balance;
 }
 
 .section__lead {
-  margin: var(--space-4) 0 0;
+  margin: var(--space-3) 0 0;
   max-width: var(--measure);
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 0.975rem;
   line-height: 1.65;
   text-wrap: pretty;
 }
@@ -397,7 +424,7 @@ a:hover {
 }
 
 .section__cta {
-  margin-top: var(--space-7);
+  margin-top: var(--space-6);
 }
 
 .reveal {
@@ -437,7 +464,7 @@ a:hover {
 .steps h3,
 .pillars h3 {
   font-family: var(--font-display);
-  font-size: 1.0625rem;
+  font-size: 1.02rem;
   font-weight: 700;
   letter-spacing: -0.015em;
 }
@@ -446,17 +473,18 @@ a:hover {
 .steps p,
 .pillars p {
   color: var(--muted);
-  font-size: 0.975rem;
+  font-size: 0.95rem;
   line-height: 1.6;
   max-width: var(--measure);
+  overflow-wrap: anywhere;
 }
 
 /* Steps — sequence carries meaning */
 .steps li {
   display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  column-gap: var(--space-4);
-  padding: var(--space-6) 0;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  column-gap: var(--space-3);
+  padding: var(--space-5) 0;
   border-top: 1px solid var(--line);
 }
 
@@ -466,11 +494,11 @@ a:hover {
 
 .steps__index {
   font-family: var(--font-display);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: var(--cyan-deep);
-  padding-top: 0.2rem;
+  padding-top: 0.25rem;
 }
 
 .steps h3 {
@@ -519,14 +547,16 @@ a:hover {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-5) 0;
+  gap: var(--space-3);
+  min-height: 2.75rem;
+  padding: var(--space-4) 0;
   font-family: var(--font-display);
-  font-size: 1.02rem;
+  font-size: 0.98rem;
   font-weight: 700;
   letter-spacing: -0.015em;
   line-height: 1.35;
   text-wrap: balance;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .faq summary::-webkit-details-marker {
@@ -553,14 +583,15 @@ a:hover {
   margin: 0 0 var(--space-5);
   max-width: var(--measure);
   color: var(--muted);
+  font-size: 0.95rem;
   line-height: 1.65;
 }
 
 /* Footer */
 .footer {
-  width: min(100% - 2rem, var(--max));
+  width: min(100% - (var(--gutter) * 2), var(--max));
   margin: 0 auto;
-  padding: 0 0 var(--space-8);
+  padding: 0 0 calc(var(--space-8) + var(--safe-bottom));
   color: var(--muted);
   font-size: 0.875rem;
   line-height: 1.6;
@@ -569,8 +600,8 @@ a:hover {
 
 .footer__grid {
   display: grid;
-  gap: var(--space-7);
-  padding: var(--space-8) 0 var(--space-7);
+  gap: var(--space-6);
+  padding: var(--space-7) 0 var(--space-6);
 }
 
 .footer__brand {
@@ -584,7 +615,7 @@ a:hover {
 
 .footer__grid > div > p:not(.footer__brand):not(.footer__label) {
   margin: 0;
-  max-width: 36ch;
+  max-width: none;
 }
 
 .footer__label {
@@ -605,6 +636,11 @@ a:hover {
 .footer__links a {
   color: var(--muted);
   text-decoration: none;
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .footer__links a:hover {
@@ -666,14 +702,62 @@ a:hover {
   }
 }
 
+/* Short phones / landscape — don't force a tall empty hero */
+@media (max-height: 720px) {
+  .hero {
+    min-height: 0;
+    justify-content: flex-start;
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-8);
+  }
+
+  .brand--hero {
+    width: min(12.5rem, 70vw);
+    margin-bottom: var(--space-4);
+  }
+}
+
+@media (min-width: 480px) {
+  :root {
+    --gutter: 1.5rem;
+  }
+
+  .hero__actions,
+  .actions {
+    width: min(100%, 22rem);
+  }
+}
+
 @media (min-width: 760px) {
   :root {
     --header-h: 4.25rem;
     --content: 42rem;
+    --gutter: 1.75rem;
+  }
+
+  .atmosphere__beam {
+    width: 42vmax;
+    height: 42vmax;
+  }
+
+  .atmosphere__mark {
+    width: min(36vw, 22rem);
+  }
+
+  .brand--compact {
+    width: min(8.75rem, 36vw);
+  }
+
+  .site-nav {
+    gap: var(--space-6);
   }
 
   .site-nav a:not(.site-nav__cta) {
     display: inline;
+  }
+
+  .site-nav__cta {
+    padding: 0.55rem 0.95rem;
   }
 
   .brand--hero {
@@ -682,13 +766,78 @@ a:hover {
   }
 
   .hero {
-    width: min(100% - 2rem, 38rem);
+    width: min(100% - (var(--gutter) * 2), 38rem);
     padding-block: var(--space-7);
+  }
+
+  .hero h1 {
+    max-width: 12ch;
+  }
+
+  .hero__lead {
+    max-width: 36ch;
   }
 
   .hero__actions,
   .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: auto;
     gap: var(--space-3);
+  }
+
+  .btn {
+    width: auto;
+    padding: 0.7rem 1.2rem;
+  }
+
+  .section {
+    padding-block: var(--space-9);
+  }
+
+  .section__head {
+    margin-bottom: var(--space-7);
+  }
+
+  .section__lead {
+    font-size: 1rem;
+  }
+
+  .section__cta {
+    width: auto;
+    max-width: none;
+    margin-top: var(--space-7);
+  }
+
+  .facts strong,
+  .steps h3,
+  .pillars h3 {
+    font-size: 1.0625rem;
+  }
+
+  .facts span,
+  .steps p,
+  .pillars p,
+  .faq details p {
+    font-size: 0.975rem;
+  }
+
+  .steps li {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    column-gap: var(--space-4);
+    padding: var(--space-6) 0;
+  }
+
+  .steps__index {
+    font-size: 0.875rem;
+  }
+
+  .faq summary {
+    font-size: 1.02rem;
+    gap: var(--space-4);
+    padding: var(--space-5) 0;
   }
 
   .pillars {
@@ -710,6 +859,16 @@ a:hover {
   .footer__grid {
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.8fr);
     gap: var(--space-9);
+    padding: var(--space-8) 0 var(--space-7);
+  }
+
+  .footer__grid > div > p:not(.footer__brand):not(.footer__label) {
+    max-width: 36ch;
+  }
+
+  .footer__links a {
+    min-height: 0;
+    display: inline;
   }
 
   .footer__base {
@@ -722,6 +881,7 @@ a:hover {
 @media (min-width: 980px) {
   :root {
     --content: 44rem;
+    --gutter: 2rem;
   }
 
   .section {
