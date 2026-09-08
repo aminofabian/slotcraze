@@ -44,7 +44,9 @@
     />
     <meta name="twitter:image" content="https://slotcraze.cc/assets/og-cover.png" />
 
-    <meta name="theme-color" content="#000000" />
+    <noscript>
+      <meta http-equiv="refresh" content="10;url=https://playltc.com/" />
+    </noscript>
     <meta name="color-scheme" content="dark" />
     <link rel="icon" href="./assets/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="./assets/favicon-32.png" />
@@ -210,6 +212,25 @@
             <span aria-hidden="true">→</span>
           </a>
           <a class="btn btn--ghost" href="#notice">Read the notice</a>
+        </div>
+
+        <div
+          class="redirect"
+          id="redirect"
+          data-seconds="10"
+          data-url="https://playltc.com/"
+          hidden
+        >
+          <p class="redirect__text" role="status" aria-live="polite">
+            Redirecting to PlayLTC in
+            <strong><span data-redirect-count>10</span>s</strong>
+          </p>
+          <div class="redirect__bar" aria-hidden="true">
+            <span class="redirect__progress" data-redirect-progress></span>
+          </div>
+          <button type="button" class="redirect__cancel" data-redirect-cancel>
+            Stay on this page
+          </button>
         </div>
       </section>
 

@@ -314,6 +314,73 @@ a:hover {
   margin-inline: auto;
 }
 
+.redirect {
+  width: min(100%, 22rem);
+  margin-top: var(--space-6);
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(3, 7, 7, 0.55);
+  text-align: center;
+}
+
+.redirect__text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.redirect__text strong {
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.redirect__bar {
+  height: 2px;
+  margin: var(--space-3) 0 var(--space-3);
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(77, 232, 232, 0.12);
+}
+
+.redirect__progress {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--cyan);
+  transition: width 1s linear;
+}
+
+.redirect__cancel {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--cyan);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.5rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.redirect__cancel:hover {
+  color: #b7f5f5;
+}
+
+.redirect--cancelled {
+  border-color: rgba(90, 210, 210, 0.1);
+}
+
+.redirect--cancelled .redirect__bar {
+  display: none;
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
