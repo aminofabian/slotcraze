@@ -79,8 +79,8 @@
     if (countEl) countEl.textContent = String(remaining);
     if (progressEl) {
       const elapsed = totalSeconds - remaining;
-      const pct = (elapsed / totalSeconds) * 100;
-      progressEl.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+      const pct = elapsed / totalSeconds;
+      progressEl.style.transform = `scaleX(${Math.min(1, Math.max(0, pct))})`;
     }
   };
 
@@ -105,7 +105,7 @@
     if (remaining <= 0) {
       window.clearInterval(timerId);
       if (countEl) countEl.textContent = "0";
-      if (progressEl) progressEl.style.width = "100%";
+      if (progressEl) progressEl.style.transform = "scaleX(1)";
       go();
       return;
     }
