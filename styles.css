@@ -285,7 +285,7 @@ a:hover {
 
 .hero__lead {
   margin: var(--space-4) auto 0;
-  max-width: 32ch;
+  max-width: 34ch;
   color: var(--muted);
   font-size: clamp(0.95rem, 3.6vw, 1.08rem);
   line-height: 1.6;
@@ -508,6 +508,7 @@ a:hover {
 .facts,
 .steps,
 .pillars,
+.games,
 .faq,
 .footer__links {
   list-style: none;
@@ -597,6 +598,64 @@ a:hover {
 
 .pillars p {
   margin: 0;
+}
+
+/* Games — search-intent names, not card grid */
+.games {
+  display: grid;
+  gap: 0;
+}
+
+.games li {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  column-gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--line);
+}
+
+.games li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.games img {
+  width: 3.25rem;
+  height: 3.25rem;
+  object-fit: cover;
+  border-radius: 0.55rem;
+  background: rgba(77, 232, 232, 0.06);
+}
+
+.games h3 {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.games h3 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.games h3 a:hover {
+  color: var(--cyan);
+}
+
+.games p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.games__more {
+  margin: var(--space-5) 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
 }
 
 /* FAQ */
@@ -842,7 +901,7 @@ a:hover {
   }
 
   .hero__lead {
-    max-width: 36ch;
+    max-width: 40ch;
   }
 
   .hero__actions,
@@ -921,6 +980,26 @@ a:hover {
 
   .pillars li:nth-child(n + 3) {
     border-top: 1px solid var(--line);
+  }
+
+  .games {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--space-8);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .games li {
+    padding: var(--space-5) 0;
+    border: none;
+  }
+
+  .games li:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+
+  .games li:last-child {
+    border-bottom: none;
   }
 
   .footer__grid {

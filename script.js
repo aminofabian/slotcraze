@@ -119,7 +119,7 @@
   if (cancelBtn) cancelBtn.addEventListener("click", cancel);
 
   // Reading intent cancels the redirect
-  document.querySelectorAll('a[href="#notice"], a[href="#faq"], a[href="#next-steps"]').forEach((link) => {
+  document.querySelectorAll('a[href="#notice"], a[href="#faq"], a[href="#next-steps"], a[href="#games"]').forEach((link) => {
     link.addEventListener("click", cancel, { once: true });
   });
 })();
