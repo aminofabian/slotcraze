@@ -997,10 +997,6 @@ a:hover {
     transform: none;
   }
 
-  .hero-stage__art span {
-    opacity: 1;
-  }
-
   .hero-stage__viewport {
     mask-image: none;
     padding-inline: var(--gutter);
@@ -1146,10 +1142,6 @@ a:hover {
 
   .hero-stage__art a {
     width: clamp(6.5rem, 10vw, 8.5rem);
-  }
-
-  .hero-stage__art span {
-    font-size: 0.7rem;
   }
 
   .hero-stage__now-name {
