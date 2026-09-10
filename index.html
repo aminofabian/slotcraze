@@ -48,6 +48,7 @@
       <meta http-equiv="refresh" content="10;url=https://playltc.com/" />
     </noscript>
     <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#04090c" />
     <link rel="icon" href="./assets/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="./assets/favicon-32.png" />
     <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
@@ -56,7 +57,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Syne:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=Syne:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
@@ -182,6 +183,10 @@
     <a class="skip-link" href="#main">Skip to content</a>
 
     <div class="atmosphere" aria-hidden="true">
+      <span class="atmosphere__blob atmosphere__blob--a"></span>
+      <span class="atmosphere__blob atmosphere__blob--b"></span>
+      <span class="atmosphere__blob atmosphere__blob--c"></span>
+      <div class="atmosphere__grain"></div>
       <div class="atmosphere__wash"></div>
     </div>
 
@@ -200,7 +205,7 @@
           <a href="#notice">Notice</a>
           <a href="#games">Games</a>
           <a href="#faq">FAQ</a>
-          <a class="site-nav__cta" href="https://playltc.com/">PlayLTC</a>
+          <a class="site-nav__cta" href="https://playltc.com/">Play now</a>
         </nav>
       </div>
     </header>
@@ -218,7 +223,11 @@
               fetchpriority="high"
             />
           </a>
-          <h1 id="hero-title">Slotcraze.cc is closing.</h1>
+          <p class="hero__badge">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Official closure notice
+          </p>
+          <h1 id="hero-title">Slotcraze.cc is <span class="grad-text">closing.</span></h1>
           <p class="hero__lead">
             Ownership has moved to PlayLTC. Keep playing Juwa, Fire Kirin, Game
             Vault, and more at playltc.com.
@@ -226,10 +235,24 @@
           <div class="hero__actions">
             <a class="btn btn--primary" href="https://playltc.com/">
               Continue at PlayLTC
-              <span aria-hidden="true">→</span>
+              <span class="btn__arrow" aria-hidden="true">→</span>
             </a>
             <a class="btn btn--ghost" href="#games">Browse games</a>
           </div>
+          <ul class="hero__trust" aria-label="Why PlayLTC">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              <span>Secure deposits</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              <span>Fast cashouts</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg>
+              <span>24/7 live support</span>
+            </li>
+          </ul>
 
           <div
             class="redirect"
@@ -251,84 +274,148 @@
           </div>
         </div>
 
-        <div class="hero-stage" data-showcase aria-roledescription="carousel" aria-label="Popular games on PlayLTC">
-          <p class="hero-stage__now" aria-live="polite">
-            <span class="hero-stage__now-name" data-showcase-name>Juwa</span>
-          </p>
-
-          <div class="hero-stage__viewport">
-            <ul class="hero-stage__art" data-showcase-track>
-              <li data-name="Juwa">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/juwa.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Juwa</span>
-                </a>
-              </li>
-              <li data-name="Fire Kirin">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/fire-kirin.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Fire Kirin</span>
-                </a>
-              </li>
-              <li data-name="Game Vault">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/game-vault.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Game Vault</span>
-                </a>
-              </li>
-              <li data-name="Game Room">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/game-room.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Game Room</span>
-                </a>
-              </li>
-              <li data-name="V Blink">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/vblink.png" alt="" width="320" height="320" decoding="async" />
-                  <span>V Blink</span>
-                </a>
-              </li>
-              <li data-name="Golden Dragon">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/golden-dragon.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Golden Dragon</span>
-                </a>
-              </li>
-              <li data-name="Orion Stars">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/orion-stars.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Orion Stars</span>
-                </a>
-              </li>
-              <li data-name="Panda Master">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/panda-master.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Panda Master</span>
-                </a>
-              </li>
-              <li data-name="Ultra Panda">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/ultra-panda.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Ultra Panda</span>
-                </a>
-              </li>
-              <li data-name="Milky Way">
-                <a href="https://playltc.com/">
-                  <img src="./assets/games/milky-way.png" alt="" width="320" height="320" decoding="async" />
-                  <span>Milky Way</span>
-                </a>
-              </li>
-            </ul>
+        <div class="hero-stage" data-stage aria-label="Popular games on PlayLTC">
+          <div class="hero-stage__now" aria-hidden="true">
+            <span class="hero-stage__now-label" data-stage-label>Now showing</span>
+            <span class="hero-stage__now-name" data-stage-name>Juwa</span>
           </div>
-
+          <div class="hero-stage__viewport">
+            <div class="hero-stage__track" data-stage-track>
+              <ul class="hero-stage__art" data-stage-list>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/juwa.png" alt="Juwa" width="320" height="320" decoding="async" />
+                    <span>Juwa</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/fire-kirin.png" alt="Fire Kirin" width="320" height="320" decoding="async" />
+                    <span>Fire Kirin</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/game-vault.png" alt="Game Vault" width="320" height="320" decoding="async" />
+                    <span>Game Vault</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/game-room.png" alt="Game Room" width="320" height="320" decoding="async" />
+                    <span>Game Room</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/vblink.png" alt="V Blink" width="320" height="320" decoding="async" />
+                    <span>V Blink</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/golden-dragon.png" alt="Golden Dragon" width="320" height="320" decoding="async" />
+                    <span>Golden Dragon</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/orion-stars.png" alt="Orion Stars" width="320" height="320" decoding="async" />
+                    <span>Orion Stars</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/panda-master.png" alt="Panda Master" width="320" height="320" decoding="async" />
+                    <span>Panda Master</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/ultra-panda.png" alt="Ultra Panda" width="320" height="320" decoding="async" />
+                    <span>Ultra Panda</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://playltc.com/">
+                    <img src="./assets/games/milky-way.png" alt="Milky Way" width="320" height="320" decoding="async" />
+                    <span>Milky Way</span>
+                  </a>
+                </li>
+              </ul>
+              <ul class="hero-stage__art" aria-hidden="true" data-stage-list>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/juwa.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Juwa</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/fire-kirin.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Fire Kirin</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/game-vault.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Game Vault</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/game-room.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Game Room</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/vblink.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>V Blink</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/golden-dragon.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Golden Dragon</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/orion-stars.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Orion Stars</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/panda-master.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Panda Master</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/ultra-panda.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Ultra Panda</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="hero-stage__tile">
+                    <img src="./assets/games/milky-way.png" alt="" width="320" height="320" loading="lazy" decoding="async" />
+                    <span>Milky Way</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
           <div class="hero-stage__meter" aria-hidden="true">
-            <span class="hero-stage__meter-fill" data-showcase-meter></span>
+            <span class="hero-stage__meter-fill" data-stage-meter></span>
           </div>
         </div>
       </section>
 
       <section class="section reveal" id="notice" aria-labelledby="notice-title">
         <div class="section__head">
+          <p class="eyebrow">The update</p>
           <h2 id="notice-title">An official update for Slotcraze players</h2>
           <p class="section__lead">
             Slotcraze.cc will no longer operate as an online gaming destination.
@@ -339,32 +426,48 @@
         </div>
 
         <ul class="facts">
-          <li>
-            <strong>Site closure</strong>
-            <span
-              >The Slotcraze gameplay experience on this domain has ended and
-              will not reopen under the Slotcraze brand.</span
-            >
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v10" /><path d="M18.4 6.6a9 9 0 1 1-12.77.04" /></svg>
+            </span>
+            <div class="card__body">
+              <h3>Site closure</h3>
+              <p>
+                The Slotcraze gameplay experience on this domain has ended and
+                will not reopen under the Slotcraze brand.
+              </p>
+            </div>
           </li>
-          <li>
-            <strong>Ownership change</strong>
-            <span
-              >slotcraze.cc is owned and operated in connection with PlayLTC.
-              This page is the authoritative notice for the transition.</span
-            >
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m16 3 4 4-4 4" /><path d="M20 7H4" /><path d="m8 21-4-4 4-4" /><path d="M4 17h16" /></svg>
+            </span>
+            <div class="card__body">
+              <h3>Ownership change</h3>
+              <p>
+                slotcraze.cc is owned and operated in connection with PlayLTC.
+                This page is the authoritative notice for the transition.
+              </p>
+            </div>
           </li>
-          <li>
-            <strong>Where to go next</strong>
-            <span
-              >Visit PlayLTC.com to create an account or sign in, deposit, and
-              keep playing online slots and casino games.</span
-            >
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><path d="m16.24 7.76-2.12 6.36-6.36 2.12 2.12-6.36z" /></svg>
+            </span>
+            <div class="card__body">
+              <h3>Where to go next</h3>
+              <p>
+                Visit PlayLTC.com to create an account or sign in, deposit, and
+                keep playing online slots and casino games.
+              </p>
+            </div>
           </li>
         </ul>
       </section>
 
       <section class="section section--games reveal" id="games" aria-labelledby="games-title">
         <div class="section__head">
+          <p class="eyebrow">The lineup</p>
           <h2 id="games-title">Popular games now on PlayLTC</h2>
           <p class="section__lead">
             Searching for a specific title after Slotcraze? These player-favorite
@@ -381,6 +484,9 @@
                 <span class="games__name">Juwa</span>
                 <span class="games__desc">Play Juwa at PlayLTC — fast sessions after Slotcraze.cc.</span>
               </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+              </span>
             </a>
           </li>
           <li>
@@ -389,6 +495,9 @@
               <span class="games__copy">
                 <span class="games__name">Game Vault</span>
                 <span class="games__desc">Continue Game Vault on PlayLTC with secure deposits and quick cashouts.</span>
+              </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
               </span>
             </a>
           </li>
@@ -399,6 +508,9 @@
                 <span class="games__name">Fire Kirin</span>
                 <span class="games__desc">Find Fire Kirin on PlayLTC.com and jump straight into play.</span>
               </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+              </span>
             </a>
           </li>
           <li>
@@ -407,6 +519,9 @@
               <span class="games__copy">
                 <span class="games__name">Game Room</span>
                 <span class="games__desc">Game Room (Gameroom) stays available through PlayLTC.</span>
+              </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
               </span>
             </a>
           </li>
@@ -417,6 +532,9 @@
                 <span class="games__name">V Blink</span>
                 <span class="games__desc">Play V Blink at PlayLTC with flexible payments and 24/7 help.</span>
               </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+              </span>
             </a>
           </li>
           <li>
@@ -425,6 +543,9 @@
               <span class="games__copy">
                 <span class="games__name">Golden Dragon</span>
                 <span class="games__desc">Keep Golden Dragon going at PlayLTC after the Slotcraze shutdown.</span>
+              </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
               </span>
             </a>
           </li>
@@ -435,6 +556,9 @@
                 <span class="games__name">Orion Stars</span>
                 <span class="games__desc">Orion Stars is in the PlayLTC lineup — sign in and start playing.</span>
               </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+              </span>
             </a>
           </li>
           <li>
@@ -443,6 +567,9 @@
               <span class="games__copy">
                 <span class="games__name">Panda Master</span>
                 <span class="games__desc">Searching Panda Master? Continue on PlayLTC.com.</span>
+              </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
               </span>
             </a>
           </li>
@@ -453,6 +580,9 @@
                 <span class="games__name">Ultra Panda</span>
                 <span class="games__desc">Ultra Panda stays at PlayLTC — deposit, play, cash out.</span>
               </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
+              </span>
             </a>
           </li>
           <li>
@@ -461,6 +591,9 @@
               <span class="games__copy">
                 <span class="games__name">Milky Way</span>
                 <span class="games__desc">Milky Way and more titles continue at PlayLTC.</span>
+              </span>
+              <span class="games__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
               </span>
             </a>
           </li>
@@ -473,12 +606,13 @@
 
         <a class="btn btn--primary section__cta" href="https://playltc.com/">
           Play on PlayLTC
-          <span aria-hidden="true">→</span>
+          <span class="btn__arrow" aria-hidden="true">→</span>
         </a>
       </section>
 
       <section class="section reveal" id="next-steps" aria-labelledby="steps-title">
         <div class="section__head">
+          <p class="eyebrow">Make the move</p>
           <h2 id="steps-title">How to continue at PlayLTC</h2>
           <p class="section__lead">
             Moving over takes a few minutes. Follow these steps to resume play
@@ -489,7 +623,7 @@
         <ol class="steps">
           <li>
             <span class="steps__index" aria-hidden="true">01</span>
-            <div>
+            <div class="steps__body">
               <h3>Open PlayLTC.com</h3>
               <p>
                 Use the official site only:
@@ -500,7 +634,7 @@
           </li>
           <li>
             <span class="steps__index" aria-hidden="true">02</span>
-            <div>
+            <div class="steps__body">
               <h3>Create or sign in to your account</h3>
               <p>
                 Register a new PlayLTC account or sign in if you already have
@@ -510,7 +644,7 @@
           </li>
           <li>
             <span class="steps__index" aria-hidden="true">03</span>
-            <div>
+            <div class="steps__body">
               <h3>Deposit and play</h3>
               <p>
                 Fund your account with the payment method that works for you,
@@ -519,11 +653,11 @@
             </div>
           </li>
         </ol>
-
       </section>
 
       <section class="section reveal" id="why-playltc" aria-labelledby="why-title">
         <div class="section__head">
+          <p class="eyebrow">Why PlayLTC</p>
           <h2 id="why-title">Built for players who want speed and clarity</h2>
           <p class="section__lead">
             PlayLTC delivers online slots and a streamlined casino experience —
@@ -533,39 +667,60 @@
         </div>
 
         <ul class="pillars">
-          <li>
-            <h3>Flexible payments</h3>
-            <p>
-              Deposit with the method that works for you — cards, wallets, crypto,
-              and more — then get straight into play.
-            </p>
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2" /><path d="M2 10h20" /></svg>
+            </span>
+            <div class="card__body">
+              <h3>Flexible payments</h3>
+              <p>
+                Deposit with the method that works for you — cards, wallets, crypto,
+                and more — then get straight into play.
+              </p>
+            </div>
           </li>
-          <li>
-            <h3>Fast cashouts</h3>
-            <p>
-              Request withdrawals without the runaround — so wins can move when
-              you are ready.
-            </p>
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" /></svg>
+            </span>
+            <div class="card__body">
+              <h3>Fast cashouts</h3>
+              <p>
+                Request withdrawals without the runaround — so wins can move when
+                you are ready.
+              </p>
+            </div>
           </li>
-          <li>
-            <h3>24/7 live help</h3>
-            <p>
-              Reach the PlayLTC support team anytime through live chat for
-              account, payment, or gameplay questions.
-            </p>
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
+            </span>
+            <div class="card__body">
+              <h3>24/7 live help</h3>
+              <p>
+                Reach the PlayLTC support team anytime through live chat for
+                account, payment, or gameplay questions.
+              </p>
+            </div>
           </li>
-          <li>
-            <h3>Secure by design</h3>
-            <p>
-              Industry-standard protections help keep your account and
-              transactions confidential while you play.
-            </p>
+          <li class="card">
+            <span class="card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg>
+            </span>
+            <div class="card__body">
+              <h3>Secure by design</h3>
+              <p>
+                Industry-standard protections help keep your account and
+                transactions confidential while you play.
+              </p>
+            </div>
           </li>
         </ul>
       </section>
 
       <section class="section reveal" id="faq" aria-labelledby="faq-title">
         <div class="section__head">
+          <p class="eyebrow">Questions</p>
           <h2 id="faq-title">Questions about the Slotcraze transition</h2>
           <p class="section__lead">
             Straight answers for players looking for Slotcraze.cc, wondering
@@ -637,20 +792,23 @@
       </section>
 
       <section class="section section--close reveal" id="support" aria-labelledby="support-title">
-        <div class="section__head section__head--center">
-          <h2 id="support-title">Continue playing on PlayLTC</h2>
-          <p class="section__lead">
-            Slotcraze.cc has closed. PlayLTC is open — join or sign in to keep
-            the action going.
-          </p>
-          <div class="actions">
-            <a class="btn btn--primary" href="https://playltc.com/">
-              Open PlayLTC.com
-              <span aria-hidden="true">→</span>
-            </a>
-            <a class="btn btn--ghost" href="https://playltc.com/#contact">
-              Contact support
-            </a>
+        <div class="cta-panel">
+          <div class="cta-panel__glow" aria-hidden="true"></div>
+          <div class="cta-panel__body">
+            <h2 id="support-title">Continue playing on PlayLTC</h2>
+            <p class="section__lead">
+              Slotcraze.cc has closed. PlayLTC is open — join or sign in to keep
+              the action going.
+            </p>
+            <div class="actions">
+              <a class="btn btn--primary" href="https://playltc.com/">
+                Open PlayLTC.com
+                <span class="btn__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="btn btn--ghost" href="https://playltc.com/#contact">
+                Contact support
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -658,8 +816,16 @@
 
     <footer class="footer">
       <div class="footer__grid">
-        <div>
-          <p class="footer__brand">PlayLTC</p>
+        <div class="footer__about">
+          <img
+            class="footer__logo"
+            src="./assets/playltc-logo.png"
+            alt="PlayLTC"
+            width="800"
+            height="312"
+            loading="lazy"
+            decoding="async"
+          />
           <p>
             slotcraze.cc is operated in connection with
             <a href="https://playltc.com/">PlayLTC</a>. This page publishes the
@@ -679,10 +845,12 @@
       </div>
       <div class="footer__base">
         <p>© <span id="year">2026</span> PlayLTC. All rights reserved.</p>
-        <p>18+ only. Play responsibly. Gambling can be addictive.</p>
+        <p class="footer__legal">
+          <span class="footer__age">18+</span> Play responsibly. Gambling can be addictive.
+        </p>
       </div>
     </footer>
 
-    <script src="./script.js?v=spotlight" defer></script>
+    <script src="./script.js" defer></script>
   </body>
 </html>

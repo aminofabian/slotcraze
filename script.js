@@ -1,18 +1,22 @@
 (() => {
+  "use strict";
+
   const DEST = "https://playltc.com/";
   const DEFAULT_SECONDS = 10;
 
+  /* ---------- Footer year ---------- */
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
+  /* ---------- Header scroll state ---------- */
   const header = document.querySelector(".site-header");
   const onScroll = () => {
-    if (!header) return;
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
   };
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
+  /* ---------- Scroll reveal ---------- */
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const sections = [...document.querySelectorAll(".reveal")];
 
@@ -42,6 +46,7 @@
     }
   }
 
+  /* ---------- FAQ: one open at a time ---------- */
   const faq = document.querySelector(".faq");
   if (faq) {
     faq.addEventListener("toggle", (event) => {
@@ -53,143 +58,126 @@
     });
   }
 
-  /* Intentional spotlight showcase — step, pause, center */
-  const showcase = document.querySelector("[data-showcase]");
-  if (showcase) {
-    const track = showcase.querySelector("[data-showcase-track]");
-    const nameEl = showcase.querySelector("[data-showcase-name]");
-    const meter = showcase.querySelector("[data-showcase-meter]");
-    const slides = track ? [...track.children] : [];
-    const HOLD_MS = 2800;
-    const STEP_MS = 850;
+  /* ---------- Hero stage: spotlight carousel ---------- */
+  const stage = document.querySelector("[data-stage]");
 
-    const setActive = (index) => {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle("is-active", i === index);
-        slide.classList.toggle("is-near", Math.abs(i - index) === 1);
-        const link = slide.querySelector("a");
-        if (link) {
-          if (i === index) link.removeAttribute("tabindex");
-          else link.setAttribute("tabindex", "-1");
-        }
+  if (stage) {
+    const track = stage.querySelector("[data-stage-track]");
+    const viewport = stage.querySelector(".hero-stage__viewport");
+    const lists = [...stage.querySelectorAll("[data-stage-list]")];
+    const nameEl = stage.querySelector("[data-stage-name]");
+    const labelEl = stage.querySelector("[data-stage-label]");
+    const meter = stage.querySelector("[data-stage-meter]");
+    const count = lists[0] ? lists[0].children.length : 0;
+
+    if (!track || !viewport || !count) {
+      /* stage markup missing — nothing to drive */
+    } else if (reduceMotion) {
+      if (labelEl) labelEl.textContent = "Popular on PlayLTC";
+      if (nameEl) nameEl.textContent = "10+ titles";
+    } else {
+      const INTERVAL = 2800;
+      const SLIDE_MS = 850;
+      const names = [...lists[0].children].map((li) => {
+        const span = li.querySelector("span");
+        return span ? span.textContent.trim() : "";
       });
 
-      const active = slides[index];
-      if (!active || !track) return;
-
-      const name = active.getAttribute("data-name") || "";
-      if (nameEl) nameEl.textContent = name;
-
-      const viewport = showcase.querySelector(".hero-stage__viewport");
-      if (!viewport) return;
-
-      const slideCenter = active.offsetLeft + active.offsetWidth / 2;
-      const target = viewport.clientWidth / 2 - slideCenter;
-      track.style.transform = `translate3d(${target}px, 0, 0)`;
-    };
-
-    if (slides.length && track) {
-      let index = 0;
+      let idx = 0;
       let timerId = 0;
-      let paused = false;
-      let pauseStarted = 0;
-      let remainHold = HOLD_MS;
+      let snapTimerId = 0;
 
-      const runMeter = (duration) => {
-        if (!meter) return;
-        meter.style.transition = "none";
-        meter.style.transform = "scaleX(0)";
-        // Force reflow, then ease the hold bar
-        void meter.offsetWidth;
-        meter.style.transition = `transform ${duration}ms linear`;
-        meter.style.transform = "scaleX(1)";
-      };
-
-      const freezeMeter = () => {
-        if (!meter) return;
-        const t = getComputedStyle(meter).transform;
-        let sx = 0;
-        if (t && t !== "none") {
-          const match = t.match(/matrix\(([^)]+)\)/);
-          if (match) sx = Number.parseFloat(match[1].split(",")[0]) || 0;
+      const paint = () => {
+        const active = ((idx % count) + count) % count;
+        for (const list of lists) {
+          [...list.children].forEach((li, i) => {
+            li.classList.toggle("is-active", i === active);
+            const d = (i - active + count) % count;
+            li.classList.toggle("is-near", d === 1 || d === count - 1);
+          });
         }
-        meter.style.transition = "none";
-        meter.style.transform = `scaleX(${Math.min(1, Math.max(0, sx))})`;
+        if (nameEl && names[active]) nameEl.textContent = names[active];
       };
 
-      const goTo = (next) => {
-        index = (next + slides.length) % slides.length;
-        setActive(index);
+      const center = (animate) => {
+        const k = ((idx % count) + count) % count;
+        const source = idx >= count && lists[1] ? lists[1] : lists[0];
+        const target = source.children[k];
+        if (!target) return;
+        const offset =
+          target.offsetLeft + target.offsetWidth / 2 - viewport.clientWidth / 2;
+        if (!animate) track.style.transition = "none";
+        track.style.transform = `translate3d(${-offset}px, 0, 0)`;
+        if (!animate) {
+          void track.offsetWidth;
+          track.style.transition = "";
+        }
       };
 
-      const schedule = (duration = HOLD_MS) => {
-        window.clearTimeout(timerId);
-        if (reduceMotion || paused) return;
-        remainHold = duration;
-        pauseStarted = performance.now();
-        runMeter(duration);
-        timerId = window.setTimeout(() => {
-          goTo(index + 1);
-          schedule(HOLD_MS);
-        }, duration + STEP_MS);
+      const runMeter = () => {
+        if (!meter) return;
+        meter.style.animation = "none";
+        void meter.offsetWidth;
+        meter.style.animation = `stage-meter ${INTERVAL}ms linear forwards`;
       };
 
-      const pause = () => {
-        if (paused || reduceMotion) return;
-        paused = true;
-        showcase.classList.add("is-paused");
-        const elapsed = performance.now() - pauseStarted;
-        remainHold = Math.max(400, remainHold - elapsed);
-        window.clearTimeout(timerId);
-        freezeMeter();
+      const tick = () => {
+        if (lists[1]) {
+          idx += 1;
+          paint();
+          center(true);
+          runMeter();
+          if (idx === count) {
+            /* the clone list looks identical to the start — snap back invisibly */
+            window.clearTimeout(snapTimerId);
+            snapTimerId = window.setTimeout(() => {
+              idx = 0;
+              paint();
+              center(false);
+            }, SLIDE_MS + 100);
+          }
+        } else {
+          idx = (idx + 1) % count;
+          paint();
+          center(true);
+          runMeter();
+        }
       };
 
-      const resume = () => {
-        if (!paused || reduceMotion) return;
-        paused = false;
-        showcase.classList.remove("is-paused");
-        schedule(remainHold);
+      const stop = () => {
+        if (timerId) window.clearInterval(timerId);
+        timerId = 0;
+        stage.classList.add("is-paused");
       };
 
-      setActive(0);
+      const start = () => {
+        if (timerId || document.hidden) return;
+        stage.classList.remove("is-paused");
+        timerId = window.setInterval(tick, INTERVAL);
+      };
 
-      if (!reduceMotion) {
-        const start = () => {
-          setActive(0);
-          schedule();
-        };
+      paint();
+      center(false);
+      runMeter();
+      start();
 
-        // Recenter after layout/fonts settle
-        requestAnimationFrame(() => {
-          requestAnimationFrame(start);
-        });
-
-        showcase.addEventListener("mouseenter", pause);
-        showcase.addEventListener("mouseleave", resume);
-        showcase.addEventListener("focusin", pause);
-        showcase.addEventListener("focusout", (event) => {
-          if (!showcase.contains(event.relatedTarget)) resume();
-        });
-
-        let resizeTimer = 0;
-        window.addEventListener(
-          "resize",
-          () => {
-            window.clearTimeout(resizeTimer);
-            resizeTimer = window.setTimeout(() => setActive(index), 120);
-          },
-          { passive: true }
-        );
-      } else {
-        slides.forEach((slide) => {
-          slide.classList.add("is-active");
-          slide.classList.remove("is-near");
-        });
-        if (meter) meter.style.transform = "scaleX(0)";
+      stage.addEventListener("mouseenter", stop);
+      stage.addEventListener("mouseleave", start);
+      stage.addEventListener("focusin", stop);
+      stage.addEventListener("focusout", start);
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) stop();
+        else start();
+      });
+      window.addEventListener("resize", () => center(false), { passive: true });
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => center(false));
       }
+      window.addEventListener("load", () => center(false));
     }
   }
 
+  /* ---------- Redirect countdown ---------- */
   const panel = document.getElementById("redirect");
   if (!panel) return;
 
@@ -255,7 +243,10 @@
   timerId = window.setInterval(tick, 1000);
   if (cancelBtn) cancelBtn.addEventListener("click", cancel);
 
-  document.querySelectorAll('a[href="#notice"], a[href="#faq"], a[href="#next-steps"], a[href="#games"]').forEach((link) => {
-    link.addEventListener("click", cancel, { once: true });
-  });
+  // Reading intent cancels the redirect
+  document
+    .querySelectorAll('a[href="#notice"], a[href="#faq"], a[href="#next-steps"], a[href="#games"]')
+    .forEach((link) => {
+      link.addEventListener("click", cancel, { once: true });
+    });
 })();
