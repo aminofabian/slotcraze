@@ -309,7 +309,7 @@ a:hover {
   animation: rise 0.8s var(--ease) 0.3s forwards;
 }
 
-/* Quiet gallery strip — art leads, captions sit below */
+/* Intentional spotlight showcase — one title at a time */
 .hero-stage {
   position: relative;
   width: 100%;
@@ -318,55 +318,76 @@ a:hover {
   animation: rise 0.85s var(--ease) 0.4s forwards;
 }
 
+.hero-stage__now {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto var(--space-4);
+  min-height: 1.6rem;
+}
+
+.hero-stage__now-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 3.2vw, 1.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
 .hero-stage__viewport {
   overflow: hidden;
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    #000 7%,
-    #000 93%,
+    #000 12%,
+    #000 88%,
     transparent 100%
   );
 }
 
-.hero-stage__track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: marquee-left 56s linear infinite;
-  padding: var(--space-2) 0;
-}
-
-.hero-stage:hover .hero-stage__track,
-.hero-stage:focus-within .hero-stage__track {
-  animation-play-state: paused;
-}
-
 .hero-stage__art {
   display: flex;
-  align-items: flex-start;
-  gap: 1.25rem;
+  align-items: flex-end;
+  gap: 1rem;
   list-style: none;
   margin: 0;
-  padding: 0 0.75rem;
+  padding: var(--space-2) 0 var(--space-3);
+  width: max-content;
+  will-change: transform;
+  transition: transform 0.85s var(--ease);
 }
 
 .hero-stage__art li {
   flex: 0 0 auto;
+  opacity: 0.38;
+  transform: scale(0.9);
+  transition:
+    opacity 0.55s var(--ease),
+    transform 0.55s var(--ease);
 }
 
-.hero-stage__art a,
-.hero-stage__art .hero-stage__tile {
+.hero-stage__art li.is-active {
+  opacity: 1;
+  transform: scale(1.08);
+  z-index: 2;
+}
+
+.hero-stage__art li.is-near {
+  opacity: 0.62;
+  transform: scale(0.96);
+}
+
+.hero-stage__art a {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 0.55rem;
-  width: clamp(5.25rem, 15vw, 7.75rem);
+  width: clamp(5.5rem, 16vw, 8.25rem);
   color: var(--muted);
   text-decoration: none;
   overflow-wrap: normal;
   word-break: normal;
-  transition: color 0.25s ease;
 }
 
 .hero-stage__art img {
@@ -374,22 +395,34 @@ a:hover {
   aspect-ratio: 3 / 4;
   object-fit: cover;
   background: #050b0b;
-  border: 1px solid rgba(77, 232, 232, 0.12);
-  filter: saturate(0.72) brightness(0.92);
+  border: 1px solid rgba(77, 232, 232, 0.1);
+  filter: saturate(0.7) brightness(0.9);
   transition:
-    border-color 0.25s ease,
-    filter 0.3s ease,
-    transform 0.4s var(--ease);
+    border-color 0.45s ease,
+    filter 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+.hero-stage__art li.is-active a {
+  color: var(--ink);
+}
+
+.hero-stage__art li.is-active img {
+  border-color: rgba(77, 232, 232, 0.42);
+  filter: saturate(1) brightness(1);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.45);
 }
 
 .hero-stage__art span {
-  font-family: var(--font-display);
-  font-size: clamp(0.62rem, 1.5vw, 0.72rem);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  line-height: 1.2;
-  text-align: center;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .hero-stage__art a:hover,
@@ -397,20 +430,30 @@ a:hover {
   color: var(--ink);
 }
 
-.hero-stage__art a:hover img,
 .hero-stage__art a:focus-visible img {
-  border-color: rgba(77, 232, 232, 0.4);
-  filter: saturate(1) brightness(1);
-  transform: translateY(-3px);
+  border-color: rgba(77, 232, 232, 0.55);
 }
 
-@keyframes marquee-left {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+.hero-stage__meter {
+  width: min(11rem, 42vw);
+  height: 1px;
+  margin: var(--space-3) auto 0;
+  overflow: hidden;
+  background: rgba(77, 232, 232, 0.12);
+}
+
+.hero-stage__meter-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: var(--cyan-deep);
+  transition: transform 0.2s linear;
+}
+
+.hero-stage.is-paused .hero-stage__meter-fill {
+  transition: none;
 }
 
 .section__head--center .actions {
@@ -937,13 +980,25 @@ a:hover {
     transform: none !important;
   }
 
-  .hero-stage__track {
-    animation: none !important;
+  .hero-stage__art {
+    transition: none !important;
     transform: none !important;
     width: 100%;
-    justify-content: center;
+    max-width: min(100% - (var(--gutter) * 2), 36rem);
+    margin-inline: auto;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
     padding: 0;
+  }
+
+  .hero-stage__art li {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-stage__art span {
+    opacity: 1;
   }
 
   .hero-stage__viewport {
@@ -951,16 +1006,8 @@ a:hover {
     padding-inline: var(--gutter);
   }
 
-  .hero-stage__art[aria-hidden="true"] {
+  .hero-stage__meter {
     display: none;
-  }
-
-  .hero-stage__art {
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    gap: 0.75rem;
-    padding: 0;
   }
 
   .reveal {
@@ -989,9 +1036,13 @@ a:hover {
     margin-bottom: var(--space-4);
   }
 
-  .hero-stage__art a,
-  .hero-stage__art .hero-stage__tile {
+  .hero-stage__art a {
     width: clamp(4.5rem, 14vw, 6rem);
+  }
+
+  .hero-stage__now {
+    min-height: 2.4rem;
+    margin-bottom: var(--space-3);
   }
 }
 
@@ -1022,22 +1073,17 @@ a:hover {
     margin-top: var(--space-4);
   }
 
-  .hero-stage {
-    padding-bottom: calc(var(--space-4) + var(--safe-bottom));
-  }
-
   .hero-stage__art {
     gap: 0.75rem;
   }
 
-  .hero-stage__art a,
-  .hero-stage__art .hero-stage__tile {
-    width: clamp(4.35rem, 17vw, 5.75rem);
+  .hero-stage__art a {
+    width: clamp(4.5rem, 17vw, 6.25rem);
     gap: 0.4rem;
   }
 
-  .hero-stage__track {
-    animation-duration: 48s;
+  .hero-stage__art li.is-active {
+    transform: scale(1.06);
   }
 }
 
@@ -1096,20 +1142,18 @@ a:hover {
 
   .hero-stage__art {
     gap: 1.15rem;
-    padding-inline: 0.5rem;
   }
 
-  .hero-stage__art a,
-  .hero-stage__art .hero-stage__tile {
-    width: clamp(6.25rem, 9.5vw, 8.25rem);
+  .hero-stage__art a {
+    width: clamp(6.5rem, 10vw, 8.5rem);
   }
 
   .hero-stage__art span {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
   }
 
-  .hero-stage__track {
-    animation-duration: 64s;
+  .hero-stage__now-name {
+    font-size: 1.45rem;
   }
 
   .hero__actions,

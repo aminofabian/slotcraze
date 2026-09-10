@@ -53,6 +53,143 @@
     });
   }
 
+  /* Intentional spotlight showcase — step, pause, center */
+  const showcase = document.querySelector("[data-showcase]");
+  if (showcase) {
+    const track = showcase.querySelector("[data-showcase-track]");
+    const nameEl = showcase.querySelector("[data-showcase-name]");
+    const meter = showcase.querySelector("[data-showcase-meter]");
+    const slides = track ? [...track.children] : [];
+    const HOLD_MS = 2800;
+    const STEP_MS = 850;
+
+    const setActive = (index) => {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("is-active", i === index);
+        slide.classList.toggle("is-near", Math.abs(i - index) === 1);
+        const link = slide.querySelector("a");
+        if (link) {
+          if (i === index) link.removeAttribute("tabindex");
+          else link.setAttribute("tabindex", "-1");
+        }
+      });
+
+      const active = slides[index];
+      if (!active || !track) return;
+
+      const name = active.getAttribute("data-name") || "";
+      if (nameEl) nameEl.textContent = name;
+
+      const viewport = showcase.querySelector(".hero-stage__viewport");
+      if (!viewport) return;
+
+      const slideCenter = active.offsetLeft + active.offsetWidth / 2;
+      const target = viewport.clientWidth / 2 - slideCenter;
+      track.style.transform = `translate3d(${target}px, 0, 0)`;
+    };
+
+    if (slides.length && track) {
+      let index = 0;
+      let timerId = 0;
+      let paused = false;
+      let pauseStarted = 0;
+      let remainHold = HOLD_MS;
+
+      const runMeter = (duration) => {
+        if (!meter) return;
+        meter.style.transition = "none";
+        meter.style.transform = "scaleX(0)";
+        // Force reflow, then ease the hold bar
+        void meter.offsetWidth;
+        meter.style.transition = `transform ${duration}ms linear`;
+        meter.style.transform = "scaleX(1)";
+      };
+
+      const freezeMeter = () => {
+        if (!meter) return;
+        const t = getComputedStyle(meter).transform;
+        let sx = 0;
+        if (t && t !== "none") {
+          const match = t.match(/matrix\(([^)]+)\)/);
+          if (match) sx = Number.parseFloat(match[1].split(",")[0]) || 0;
+        }
+        meter.style.transition = "none";
+        meter.style.transform = `scaleX(${Math.min(1, Math.max(0, sx))})`;
+      };
+
+      const goTo = (next) => {
+        index = (next + slides.length) % slides.length;
+        setActive(index);
+      };
+
+      const schedule = (duration = HOLD_MS) => {
+        window.clearTimeout(timerId);
+        if (reduceMotion || paused) return;
+        remainHold = duration;
+        pauseStarted = performance.now();
+        runMeter(duration);
+        timerId = window.setTimeout(() => {
+          goTo(index + 1);
+          schedule(HOLD_MS);
+        }, duration + STEP_MS);
+      };
+
+      const pause = () => {
+        if (paused || reduceMotion) return;
+        paused = true;
+        showcase.classList.add("is-paused");
+        const elapsed = performance.now() - pauseStarted;
+        remainHold = Math.max(400, remainHold - elapsed);
+        window.clearTimeout(timerId);
+        freezeMeter();
+      };
+
+      const resume = () => {
+        if (!paused || reduceMotion) return;
+        paused = false;
+        showcase.classList.remove("is-paused");
+        schedule(remainHold);
+      };
+
+      setActive(0);
+
+      if (!reduceMotion) {
+        const start = () => {
+          setActive(0);
+          schedule();
+        };
+
+        // Recenter after layout/fonts settle
+        requestAnimationFrame(() => {
+          requestAnimationFrame(start);
+        });
+
+        showcase.addEventListener("mouseenter", pause);
+        showcase.addEventListener("mouseleave", resume);
+        showcase.addEventListener("focusin", pause);
+        showcase.addEventListener("focusout", (event) => {
+          if (!showcase.contains(event.relatedTarget)) resume();
+        });
+
+        let resizeTimer = 0;
+        window.addEventListener(
+          "resize",
+          () => {
+            window.clearTimeout(resizeTimer);
+            resizeTimer = window.setTimeout(() => setActive(index), 120);
+          },
+          { passive: true }
+        );
+      } else {
+        slides.forEach((slide) => {
+          slide.classList.add("is-active");
+          slide.classList.remove("is-near");
+        });
+        if (meter) meter.style.transform = "scaleX(0)";
+      }
+    }
+  }
+
   const panel = document.getElementById("redirect");
   if (!panel) return;
 
@@ -118,7 +255,6 @@
   timerId = window.setInterval(tick, 1000);
   if (cancelBtn) cancelBtn.addEventListener("click", cancel);
 
-  // Reading intent cancels the redirect
   document.querySelectorAll('a[href="#notice"], a[href="#faq"], a[href="#next-steps"], a[href="#games"]').forEach((link) => {
     link.addEventListener("click", cancel, { once: true });
   });
