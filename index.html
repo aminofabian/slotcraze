@@ -216,46 +216,197 @@
 
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
-        <a class="brand brand--hero" href="https://playltc.com/" aria-label="PlayLTC">
-          <img
-            src="./assets/playltc-logo.png"
-            alt="PlayLTC.com"
-            width="800"
-            height="312"
-            decoding="async"
-            fetchpriority="high"
-          />
-        </a>
-        <h1 id="hero-title">Slotcraze.cc is closing.</h1>
-        <p class="hero__lead">
-          Ownership has moved to PlayLTC. Keep playing Juwa, Fire Kirin, Game
-          Vault, and more at playltc.com.
-        </p>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href="https://playltc.com/">
-            Continue at PlayLTC
-            <span aria-hidden="true">→</span>
+        <div class="hero__core">
+          <a class="brand brand--hero" href="https://playltc.com/" aria-label="PlayLTC">
+            <img
+              src="./assets/playltc-logo.png"
+              alt="PlayLTC.com"
+              width="800"
+              height="312"
+              decoding="async"
+              fetchpriority="high"
+            />
           </a>
-          <a class="btn btn--ghost" href="#notice">Read the notice</a>
+          <h1 id="hero-title">Slotcraze.cc is closing.</h1>
+          <p class="hero__lead">
+            Ownership has moved to PlayLTC. Keep playing Juwa, Fire Kirin, Game
+            Vault, and more at playltc.com.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="https://playltc.com/">
+              Continue at PlayLTC
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn--ghost" href="#games">Browse games</a>
+          </div>
+
+          <div
+            class="redirect"
+            id="redirect"
+            data-seconds="10"
+            data-url="https://playltc.com/"
+            hidden
+          >
+            <p class="redirect__text" role="status" aria-live="polite">
+              Redirecting to PlayLTC in
+              <strong><span data-redirect-count>10</span>s</strong>
+            </p>
+            <div class="redirect__bar" aria-hidden="true">
+              <span class="redirect__progress" data-redirect-progress></span>
+            </div>
+            <button type="button" class="redirect__cancel" data-redirect-cancel>
+              Stay on this page
+            </button>
+          </div>
         </div>
 
-        <div
-          class="redirect"
-          id="redirect"
-          data-seconds="10"
-          data-url="https://playltc.com/"
-          hidden
-        >
-          <p class="redirect__text" role="status" aria-live="polite">
-            Redirecting to PlayLTC in
-            <strong><span data-redirect-count>10</span>s</strong>
-          </p>
-          <div class="redirect__bar" aria-hidden="true">
-            <span class="redirect__progress" data-redirect-progress></span>
+        <div class="hero-stage" aria-label="Popular games on PlayLTC">
+          <div class="hero-stage__deck">
+            <div class="hero-stage__rail hero-stage__rail--top" aria-hidden="true"></div>
+            <div class="hero-stage__floor" aria-hidden="true"></div>
+            <div class="hero-stage__viewport">
+              <div class="hero-stage__track hero-stage__track--art">
+                <ul class="hero-stage__art">
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/juwa.png" alt="Juwa" width="320" height="320" decoding="async" />
+                      <span>Juwa</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/fire-kirin.png" alt="Fire Kirin" width="320" height="320" decoding="async" />
+                      <span>Fire Kirin</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/game-vault.png" alt="Game Vault" width="320" height="320" decoding="async" />
+                      <span>Game Vault</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/game-room.png" alt="Game Room" width="320" height="320" decoding="async" />
+                      <span>Game Room</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/vblink.png" alt="V Blink" width="320" height="320" decoding="async" />
+                      <span>V Blink</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/golden-dragon.png" alt="Golden Dragon" width="320" height="320" decoding="async" />
+                      <span>Golden Dragon</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/orion-stars.png" alt="Orion Stars" width="320" height="320" decoding="async" />
+                      <span>Orion Stars</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/panda-master.png" alt="Panda Master" width="320" height="320" decoding="async" />
+                      <span>Panda Master</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/ultra-panda.png" alt="Ultra Panda" width="320" height="320" decoding="async" />
+                      <span>Ultra Panda</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://playltc.com/">
+                      <img src="./assets/games/milky-way.png" alt="Milky Way" width="320" height="320" decoding="async" />
+                      <span>Milky Way</span>
+                    </a>
+                  </li>
+                </ul>
+                <ul class="hero-stage__art" aria-hidden="true">
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/juwa.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Juwa</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/fire-kirin.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Fire Kirin</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/game-vault.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Game Vault</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/game-room.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Game Room</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/vblink.png" alt="" width="320" height="320" decoding="async" />
+                      <span>V Blink</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/golden-dragon.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Golden Dragon</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/orion-stars.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Orion Stars</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/panda-master.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Panda Master</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/ultra-panda.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Ultra Panda</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="hero-stage__tile">
+                      <img src="./assets/games/milky-way.png" alt="" width="320" height="320" decoding="async" />
+                      <span>Milky Way</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="hero-stage__rail hero-stage__rail--bot" aria-hidden="true"></div>
           </div>
-          <button type="button" class="redirect__cancel" data-redirect-cancel>
-            Stay on this page
-          </button>
+
+          <div class="hero-stage__names" aria-hidden="true">
+            <div class="hero-stage__track hero-stage__track--names">
+              <p>
+                Juwa · Fire Kirin · Game Vault · Game Room · V Blink · Golden Dragon ·
+                Orion Stars · Panda Master · Ultra Panda · Milky Way ·
+              </p>
+              <p>
+                Juwa · Fire Kirin · Game Vault · Game Room · V Blink · Golden Dragon ·
+                Orion Stars · Panda Master · Ultra Panda · Milky Way ·
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
